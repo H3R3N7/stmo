@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-root="../.." data-page="games">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>打地鼠 | 海口实验中学科技社</title>
+    <meta name="description" content="45 秒限时打地鼠小游戏：敲中冒头的鼹鼠得分，连击可以获得更高分数。">
+    <meta name="keywords" content="打地鼠,小游戏,反应,科技社,海口实验中学">
+    <meta name="author" content="MQSI, maqingshui@outlook.com">
+    <meta name="theme-color" content="#f7fafb">
+    <link rel="canonical" href="https://hkems-stmo.top/pages/games/whack-a-mole.html">
+    <meta property="og:title" content="打地鼠 | 海口实验中学科技社">
+    <meta property="og:image" content="https://hkems-stmo.top/assets/images/brand/og-cover.jpg">
+    <link rel="icon" href="../../assets/images/brand/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../../assets/images/brand/favicon-180.png">
+    <link rel="stylesheet" href="../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/glass.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/game.css">
+    <script src="../../assets/js/core/theme.js"></script>
+</head>
+
+<body id="top">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="top-app-bar" id="site-header"></header>
+
+    <main id="main" class="page">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="面包屑">
+                <a href="../../index.html">首页</a>
+                <span data-icon="chevron-right"></span>
+                <span>小游戏</span>
+                <span data-icon="chevron-right"></span>
+                <span aria-current="page">打地鼠</span>
+            </nav>
+        </div>
+
+        <div class="container game-shell">
+            <div class="section-head" style="margin-bottom: 0;">
+                <div class="section-head__text">
+                    <h1 class="headline-lg">打地鼠</h1>
+                    <p class="section-lead">45 秒，看你能敲中几只。连续命中有连击加成，漏掉一只连击清零。</p>
+                </div>
+            </div>
+
+            <div class="game-hud">
+                <div class="score-pill">
+                    <span>得分</span>
+                    <strong id="mole-score">0</strong>
+                </div>
+                <div class="score-pill score-pill--accent">
+                    <span>剩余</span>
+                    <strong id="mole-time">45</strong>
+                </div>
+                <div class="score-pill">
+                    <span>连击</span>
+                    <strong id="mole-combo">—</strong>
+                </div>
+                <div class="score-pill">
+                    <span>最高</span>
+                    <strong id="mole-best">0</strong>
+                </div>
+            </div>
+
+            <div class="mole-wrap">
+                <div class="mole-grid" id="mole-grid" aria-label="打地鼠场地"></div>
+                <div class="mole-overlay" id="mole-overlay">
+                    <h3 class="mole-overlay__title" id="mole-overlay-title">打地鼠</h3>
+                    <p class="mole-overlay__text" id="mole-overlay-text"></p>
+                    <button class="btn btn--filled" type="button" id="mole-start">开始游戏</button>
+                </div>
+                <div class="combo-flash" id="mole-flash" aria-live="polite"></div>
+            </div>
+
+            <div class="game-legend">
+                <span>鼠标点击或手指点按冒头的鼹鼠</span>
+                <span>连击加成：每多一次连击，单次分数 +5</span>
+            </div>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <script src="../../assets/js/core/ui.js" defer></script>
+    <script src="../../assets/js/layout/header.js" defer></script>
+    <script src="../../assets/js/layout/footer.js" defer></script>
+    <script src="../../assets/js/pages/whack-a-mole.js" defer></script>
+</body>
+
+</html>

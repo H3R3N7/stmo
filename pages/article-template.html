@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-root="../.." data-page="article">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- 1. 改标题与描述 -->
+    <title>文章标题 | 海口实验中学科技社</title>
+    <meta name="description" content="用一两句话说明这篇内容写了什么。">
+    <meta name="keywords" content="关键词,用逗号分隔">
+    <meta name="author" content="MQSI, maqingshui@outlook.com">
+    <meta name="theme-color" content="#f7fafb">
+    <link rel="canonical" href="https://hkems-stmo.top/pages/article-template.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="文章标题 | 海口实验中学科技社">
+    <meta property="og:image" content="https://hkems-stmo.top/assets/images/brand/og-cover.jpg">
+    <link rel="icon" href="../assets/images/brand/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../assets/images/brand/favicon-180.png">
+    <!-- 2. 样式固定这五个，路径按所在目录调整 -->
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/glass.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/article.css">
+    <script src="../assets/js/core/theme.js"></script>
+</head>
+
+<body id="top">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="top-app-bar" id="site-header"></header>
+
+    <main id="main" class="page">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="面包屑">
+                <a href="../index.html">首页</a>
+                <span data-icon="chevron-right"></span>
+                <a href="../index.html#news">动态</a>
+                <span data-icon="chevron-right"></span>
+                <span aria-current="page">文章标题</span>
+            </nav>
+        </div>
+
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero__panel">
+                    <h1 class="page-hero__title">文章标题</h1>
+                    <p class="page-hero__lead">一句引导语，说明这篇文章要讲什么。</p>
+                    <div class="page-hero__meta">
+                        <span><span data-icon="calendar"></span>2026 年 1 月 1 日</span>
+                        <span><span data-icon="users"></span>作者</span>
+                        <span><span data-icon="clock"></span>约 3 分钟阅读</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container article-layout">
+            <!-- 目录会由 article.js 依据下面的 h2 / h3 自动生成 -->
+            <aside class="toc glass" id="article-toc" aria-label="本文目录"></aside>
+
+            <article class="article">
+                <p>正文第一段。每个小标题都要有唯一的 id，目录与锚点都依赖它。</p>
+
+                <h2 id="section-one">小标题一</h2>
+                <p>正文内容。</p>
+
+                <figure>
+                    <img src="../assets/images/news/rocket-1.webp" alt="图片说明" width="980" height="480"
+                        loading="lazy">
+                    <figcaption>图片说明，写清楚图里是什么。</figcaption>
+                </figure>
+
+                <h2 id="section-two">小标题二</h2>
+                <p>需要强调时用 <strong>加粗</strong>，需要引用时用下面的样式：</p>
+                <blockquote>一段引用文字。</blockquote>
+
+                <h3 id="section-two-one">更小的标题</h3>
+                <ul>
+                    <li>列表项一</li>
+                    <li>列表项二</li>
+                </ul>
+
+                <div class="callout callout--info">
+                    <span data-icon="info"></span>
+                    <div><strong>提示：</strong>这里可以放通知或注意事项。</div>
+                </div>
+
+                <div class="article__divider"><span data-icon="sparkles"></span></div>
+
+                <nav class="article-foot" aria-label="相关页面">
+                    <a class="glass" href="activity/use-scheduling.html">
+                        <span>相关 · 活动</span>
+                        <strong>科技教室使用安排</strong>
+                    </a>
+                    <a class="glass" href="../index.html#news">
+                        <span>相关 · 动态</span>
+                        <strong>返回最新动态</strong>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <!-- 3. 脚本顺序固定：ui → header → footer → article -->
+    <script src="../assets/js/core/ui.js" defer></script>
+    <script src="../assets/js/layout/header.js" defer></script>
+    <script src="../assets/js/layout/footer.js" defer></script>
+    <script src="../assets/js/pages/article.js" defer></script>
+</body>
+
+</html>

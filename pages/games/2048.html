@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-root="../.." data-page="games">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>2048 | 海口实验中学科技社</title>
+    <meta name="description" content="科技社版 2048：方向键或滑动合并相同数字，支持 2048 与 128 两种目标，可撤销一步。">
+    <meta name="keywords" content="2048,小游戏,数字游戏,科技社,海口实验中学">
+    <meta name="author" content="MQSI, maqingshui@outlook.com">
+    <meta name="theme-color" content="#f7fafb">
+    <link rel="canonical" href="https://hkems-stmo.top/pages/games/2048.html">
+    <meta property="og:title" content="2048 | 海口实验中学科技社">
+    <meta property="og:image" content="https://hkems-stmo.top/assets/images/brand/og-cover.jpg">
+    <link rel="icon" href="../../assets/images/brand/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../../assets/images/brand/favicon-180.png">
+    <link rel="stylesheet" href="../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/glass.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/game.css">
+    <script src="../../assets/js/core/theme.js"></script>
+</head>
+
+<body id="top">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="top-app-bar" id="site-header"></header>
+
+    <main id="main" class="page">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="面包屑">
+                <a href="../../index.html">首页</a>
+                <span data-icon="chevron-right"></span>
+                <span>小游戏</span>
+                <span data-icon="chevron-right"></span>
+                <span aria-current="page">2048</span>
+            </nav>
+        </div>
+
+        <div class="container game-shell">
+            <div class="section-head" style="margin-bottom: 0;">
+                <div class="section-head__text">
+                    <h1 class="headline-lg">2048</h1>
+                    <p class="section-lead">合并相同的数字，看你能不能摸到目标。最高分保存在本机。</p>
+                </div>
+            </div>
+
+            <div class="game-hud">
+                <div class="score-pill">
+                    <span>得分</span>
+                    <strong id="game-score">0</strong>
+                </div>
+                <div class="score-pill score-pill--accent">
+                    <span>最高</span>
+                    <strong id="game-best">0</strong>
+                </div>
+                <div class="segmented" role="group" aria-label="选择目标">
+                    <button class="segmented__item" type="button" data-target="2048" aria-selected="true">2048</button>
+                    <button class="segmented__item" type="button" data-target="128" aria-selected="false">128</button>
+                </div>
+                <div class="game-hud__spacer"></div>
+                <button class="icon-btn" type="button" id="undo-game" aria-label="撤销上一步" title="撤销">
+                    <span data-icon="reset"></span>
+                </button>
+                <button class="btn btn--tonal btn--sm" type="button" id="new-game">
+                    <span data-icon="plus"></span>新游戏
+                </button>
+            </div>
+
+            <div class="board" id="game-board" aria-label="2048 棋盘" role="application">
+                <div class="board__grid" aria-hidden="true">
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                    <div class="board__cell"></div>
+                </div>
+                <div class="board__tiles" id="game-tiles" aria-live="polite"></div>
+                <div class="board__overlay" id="game-overlay" role="alertdialog" aria-live="assertive">
+                    <h3 id="overlay-title">游戏结束</h3>
+                    <p id="overlay-text"></p>
+                    <div class="btn-group">
+                        <button class="btn btn--filled" type="button" id="overlay-continue" hidden>继续挑战</button>
+                        <button class="btn btn--outlined" type="button" id="overlay-restart">再来一局</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-legend">
+                <span class="kbd-row"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 移动</span>
+                <span class="kbd-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 同样可用</span>
+                <span>触屏可直接滑动</span>
+                <span>当前目标：<strong id="game-target">2048</strong></span>
+            </div>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <script src="../../assets/js/core/ui.js" defer></script>
+    <script src="../../assets/js/layout/header.js" defer></script>
+    <script src="../../assets/js/layout/footer.js" defer></script>
+    <script src="../../assets/js/pages/2048.js" defer></script>
+</body>
+
+</html>

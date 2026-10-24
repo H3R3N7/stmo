@@ -1,0 +1,259 @@
+/* ==========================================================================
+   HKEMS-STMO · Design tokens
+   Material Design 3 colour roles, type scale, shape, elevation and motion.
+   Two low-level layers: reference values (fixed ramps) and system roles
+   (theme aware). Components only ever read the system roles.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts
+   Latin: Google Sans Flex (variable weight, self-hosted latin subset).
+   Chinese: the system UI font of the platform (PingFang SC on macOS/iOS,
+   Microsoft YaHei on Windows, Noto Sans CJK on Linux/Android).
+
+   The webfont is limited to the Latin range, so Latin letters and digits use
+   Google Sans Flex while Chinese characters fall through to the system font.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Google Sans Flex";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("../fonts/google-sans-flex-latin-variable.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---------- type ---------- */
+  --font-sans: "Google Sans Flex", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Noto Sans SC", "Source Han Sans SC", system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "SFMono-Regular", ui-monospace,
+    Menlo, Consolas, "Liberation Mono", monospace;
+
+  --font-display-lg: 400 clamp(2.6rem, 1.6rem + 4.2vw, 4rem) / 1.12 var(--font-display, var(--font-sans));
+  --font-display-md: 400 clamp(2.1rem, 1.4rem + 2.6vw, 3rem) / 1.16 var(--font-sans);
+  --font-display-sm: 400 clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem) / 1.22 var(--font-sans);
+  --font-headline-lg: 400 clamp(1.6rem, 1.25rem + 1.2vw, 2rem) / 1.25 var(--font-sans);
+  --font-headline-md: 400 1.75rem / 1.28 var(--font-sans);
+  --font-headline-sm: 500 1.5rem / 1.32 var(--font-sans);
+  --font-title-lg: 500 1.375rem / 1.35 var(--font-sans);
+  --font-title-md: 600 1rem / 1.5 var(--font-sans);
+  --font-title-sm: 600 0.875rem / 1.45 var(--font-sans);
+  --font-body-lg: 400 1.0625rem / 1.75 var(--font-sans);
+  --font-body-md: 400 1rem / 1.72 var(--font-sans);
+  --font-body-sm: 400 0.875rem / 1.6 var(--font-sans);
+  --font-label-lg: 600 0.875rem / 1.4 var(--font-sans);
+  --font-label-md: 600 0.8125rem / 1.4 var(--font-sans);
+  --font-label-sm: 600 0.75rem / 1.4 var(--font-sans);
+
+  --tracking-tight: -0.015em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.16em;
+
+  /* ---------- shape ---------- */
+  --shape-xs: 4px;
+  --shape-sm: 8px;
+  --shape-md: 12px;
+  --shape-lg: 16px;
+  --shape-xl: 24px;
+  --shape-2xl: 28px;
+  --shape-3xl: 36px;
+  --shape-full: 999px;
+
+  /* ---------- spacing ----------
+     Kept in rem so the whole layout scales with the root font size. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3rem;
+  --space-10: 4rem;
+  --space-11: 5rem;
+  --space-12: 7.5rem;
+
+  --container-max: 1240px;
+  --container-pad: clamp(16px, 4vw, 40px);
+  --app-bar-height: 4.5rem;
+
+  /* ---------- motion ---------- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-emphasized-accel: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --dur-short1: 100ms;
+  --dur-short2: 150ms;
+  --dur-short3: 200ms;
+  --dur-medium1: 250ms;
+  --dur-medium2: 300ms;
+  --dur-long1: 450ms;
+  --dur-long2: 600ms;
+
+  --z-base: 1;
+  --z-sticky: 20;
+  --z-appbar: 40;
+  --z-drawer: 60;
+  --z-dialog: 80;
+  --z-toast: 90;
+}
+
+/* ==========================================================================
+   Colour · light scheme
+   ========================================================================== */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --md-primary: #00658e;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #c4e7ff;
+  --md-on-primary-container: #001e2c;
+
+  --md-secondary: #4e616b;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #d3e5ef;
+  --md-on-secondary-container: #0b1e26;
+
+  --md-tertiary: #7c5b00;
+  --md-on-tertiary: #ffffff;
+  --md-tertiary-container: #ffdf9e;
+  --md-on-tertiary-container: #271900;
+
+  --md-error: #ba1a1a;
+  --md-on-error: #ffffff;
+  --md-error-container: #ffdad6;
+  --md-on-error-container: #410002;
+  --md-success: #1e6b46;
+  --md-on-success: #ffffff;
+
+  --md-surface: #f7fafb;
+  --md-surface-dim: #d8e0e3;
+  --md-surface-bright: #f7fafb;
+  --md-on-surface: #181c1e;
+  --md-surface-variant: #dbe4e8;
+  --md-on-surface-variant: #3f484c;
+
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #f1f5f7;
+  --md-surface-container: #ebf1f3;
+  --md-surface-container-high: #e5ecef;
+  --md-surface-container-highest: #dee7ea;
+
+  --md-outline: #6f797d;
+  --md-outline-variant: #bfc8cc;
+  --md-scrim: #000000;
+  --md-inverse-surface: #2d3133;
+  --md-inverse-on-surface: #eff1f2;
+  --md-inverse-primary: #7bd0ff;
+
+  --md-shadow: 11 30 38;
+
+  /* glass / acrylic */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.74);
+  --glass-bg-soft: rgba(255, 255, 255, 0.34);
+  --glass-border: rgba(255, 255, 255, 0.72);
+  --glass-border-soft: rgba(11, 30, 38, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-tint: rgba(0, 101, 142, 0.06);
+  --glass-blur: 22px;
+  --glass-saturate: 160%;
+
+  --body-bg: #f3f5f6;
+
+  --focus-ring: 0 0 0 3px rgba(0, 101, 142, 0.32);
+  --state-hover: 0.08;
+  --state-focus: 0.12;
+  --state-pressed: 0.12;
+}
+
+/* ==========================================================================
+   Colour · dark scheme
+   ========================================================================== */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --md-primary: #7bd0ff;
+  --md-on-primary: #003549;
+  --md-primary-container: #004d68;
+  --md-on-primary-container: #c4e7ff;
+
+  --md-secondary: #b7cad5;
+  --md-on-secondary: #21333c;
+  --md-secondary-container: #374a54;
+  --md-on-secondary-container: #d3e5ef;
+
+  --md-tertiary: #f5be48;
+  --md-on-tertiary: #412d00;
+  --md-tertiary-container: #5e4300;
+  --md-on-tertiary-container: #ffdf9e;
+
+  --md-error: #ffb4ab;
+  --md-on-error: #690005;
+  --md-error-container: #93000a;
+  --md-on-error-container: #ffdad6;
+  --md-success: #7bdca8;
+  --md-on-success: #00391f;
+
+  --md-surface: #0c1418;
+  --md-surface-dim: #0c1418;
+  --md-surface-bright: #323b3f;
+  --md-on-surface: #e2e9ec;
+  --md-surface-variant: #3f484c;
+  --md-on-surface-variant: #bfc8cc;
+
+  --md-surface-container-lowest: #070e12;
+  --md-surface-container-low: #111a1f;
+  --md-surface-container: #151f24;
+  --md-surface-container-high: #1b262b;
+  --md-surface-container-highest: #212e34;
+
+  --md-outline: #899398;
+  --md-outline-variant: #3f484c;
+  --md-scrim: #000000;
+  --md-inverse-surface: #e2e9ec;
+  --md-inverse-on-surface: #263034;
+  --md-inverse-primary: #00658e;
+
+  --md-shadow: 0 0 0;
+
+  --glass-bg: rgba(17, 26, 31, 0.55);
+  --glass-bg-strong: rgba(17, 26, 31, 0.78);
+  --glass-bg-soft: rgba(17, 26, 31, 0.34);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-soft: rgba(255, 255, 255, 0.07);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-tint: rgba(123, 208, 255, 0.05);
+  --glass-blur: 26px;
+  --glass-saturate: 140%;
+
+  --body-bg: #0e1214;
+
+  --focus-ring: 0 0 0 3px rgba(123, 208, 255, 0.35);
+}
+
+/* ==========================================================================
+   Elevation
+   ========================================================================== */
+:root {
+  --elev-1: 0 1px 2px rgb(var(--md-shadow) / 0.18), 0 1px 3px 1px rgb(var(--md-shadow) / 0.1);
+  --elev-2: 0 1px 2px rgb(var(--md-shadow) / 0.18), 0 2px 6px 2px rgb(var(--md-shadow) / 0.12);
+  --elev-3: 0 4px 8px 3px rgb(var(--md-shadow) / 0.12), 0 1px 3px rgb(var(--md-shadow) / 0.2);
+  --elev-4: 0 6px 10px 4px rgb(var(--md-shadow) / 0.12), 0 2px 3px rgb(var(--md-shadow) / 0.2);
+  --elev-5: 0 8px 12px 6px rgb(var(--md-shadow) / 0.14), 0 4px 4px rgb(var(--md-shadow) / 0.2);
+}
+
+[data-theme="dark"] {
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.5), 0 1px 3px 1px rgb(0 0 0 / 0.35);
+  --elev-2: 0 1px 2px rgb(0 0 0 / 0.5), 0 2px 8px 2px rgb(0 0 0 / 0.4);
+  --elev-3: 0 4px 10px 3px rgb(0 0 0 / 0.45), 0 1px 4px rgb(0 0 0 / 0.5);
+  --elev-4: 0 8px 14px 4px rgb(0 0 0 / 0.5), 0 2px 4px rgb(0 0 0 / 0.5);
+  --elev-5: 0 12px 20px 6px rgb(0 0 0 / 0.55), 0 4px 6px rgb(0 0 0 / 0.5);
+}

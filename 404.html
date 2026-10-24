@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-root="" data-page="home">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>页面走丢了 | 海口实验中学科技社</title>
+    <meta name="description" content="找不到这个页面，回到首页继续浏览。">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#f7fafb">
+    <link rel="icon" href="assets/images/brand/favicon-32.png" sizes="32x32">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/glass.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <script src="assets/js/core/theme.js"></script>
+    <style>
+        .lost {
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: calc(var(--app-bar-height) + 24px) var(--container-pad) 48px;
+        }
+
+        .lost__panel {
+            width: min(100%, 640px);
+            padding: clamp(28px, 5vw, 56px);
+            border-radius: var(--shape-3xl);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .lost__code {
+            font: var(--font-display-lg);
+            letter-spacing: -0.04em;
+            color: var(--md-primary);
+        }
+    </style>
+</head>
+
+<body id="top">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="top-app-bar" id="site-header"></header>
+
+    <main id="main" class="lost">
+        <div class="lost__panel glass" data-reveal>
+            <h1 class="lost__code">页面走丢了</h1>
+            <p class="text-muted">
+                这个地址可能已经搬家，或者从来没有存在过。不如回首页看看最近社团在做什么。
+            </p>
+            <div class="btn-group" style="justify-content:center;">
+                <a class="btn btn--filled" href="index.html">回到首页</a>
+                <a class="btn btn--outlined" href="index.html#news">最新动态</a>
+            </div>
+        </div>
+    </main>
+
+    <footer id="site-footer"></footer>
+
+    <script src="assets/js/core/ui.js" defer></script>
+    <script src="assets/js/layout/header.js" defer></script>
+    <script src="assets/js/layout/footer.js" defer></script>
+</body>
+
+</html>
