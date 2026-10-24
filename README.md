@@ -1,4 +1,4 @@
-# 海口实验中学科技社 · 官方网站
+
 
 ![科技社](https://hkems-stmo.top/assets/images/brand/logo-wide.png)
 
