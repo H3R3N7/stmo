@@ -174,10 +174,8 @@
                     panel.style.maxHeight === "none";
     var open = false;
     panel.style.overflow = "hidden";
-    panel.style.maxHeight = "0px";
     toggle.setAttribute("role", "button");
     toggle.setAttribute("tabindex", "0");
-    toggle.setAttribute("aria-expanded", "false");
     var apply = function (state) {
       open = state;
       panel.style.maxHeight = state ? panel.scrollHeight + "px" : "0px";
@@ -185,7 +183,11 @@
       toggle.setAttribute("aria-expanded", state ? "true" : "false");
     };
     var flip = function () { apply(!open); };
+    /* initialise without a 0-px dip: the page may already render expanded */
+    panel.style.transition = "none";
     apply(startOpen);
+    void panel.offsetHeight;
+    panel.style.transition = "";
     toggle.addEventListener("click", flip);
     toggle.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
