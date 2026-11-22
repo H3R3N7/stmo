@@ -60,27 +60,51 @@ html[data-theme="light"] .member:hover { background-color: var(--surface-three);
 html[data-theme="light"] .donate-card:hover { background-color: var(--tertiary); }
 
 
-/* poster frame: same rendered width as the original manager screenshot
-   (2880x6122); frame ring is a fixed dark color, independent of theme */
+/* image frames: the frame hugs the picture itself, so swapping manager.png
+   or the poster does not require touching any ratio/width constant */
 .device-frame.x-home {
+  width: fit-content;
   height: auto;
-  width: calc((max(100vh, 600px) - 1rem) * 0.470458 + 1rem);
+  display: inline-block;
+  padding: .5rem;
   background: #1f1f26;
 }
 html[data-theme="light"] .device-frame.x-home { background: #ffffff; }
 .device-frame.x-home img,
 .device-frame.x-home img:where(.x-home) {
-  width: 100%;
+  display: block;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 190px);
+  border-radius: 1.25rem;
 }
+
+.screenshot.x-joinus,
+.screenshot.x-joinus:where(.x-joinus) { display: flex; justify-content: center; }
 .screenshot.x-joinus img,
 .screenshot.x-joinus img:where(.x-joinus) {
-  width: calc((50rem - 1rem) * 0.470458 + 1rem);
+  display: block;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: min(50rem, 80vh);
+  object-fit: contain;
   background-color: #1f1f26;
+  padding: .5rem;
+  border-radius: 2rem;
 }
+html[data-theme="light"] .screenshot.x-joinus img { background-color: #ffffff; }
 html[data-theme="light"] .device-frame.x-home,
 html[data-theme="light"] .screenshot.x-joinus img { box-shadow: none; }
+
+@media (max-width: 768px) {
+  .screenshot.x-joinus img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+}
 
 /* page transition, matching revanced.app: main content flies in from y=10px
    with a 750ms cubic-out fade (Svelte fly transition on the page main) */
@@ -253,4 +277,42 @@ html.terms-open, html.terms-open body { overflow: hidden; }
 }
 @media (max-width: 700px) {
   .donate-cards.single.x-donate-page { width: 100%; }
+}
+
+
+/* ---- mobile drawer: width squeeze-out, exactly like revanced.app ---- */
+@media (max-width: 768px) {
+  .nav-drawer.x-site-nav {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 0;
+    max-width: 85vw;
+    padding: 6rem 1rem 1rem;
+    overflow: hidden;
+    visibility: hidden;
+    border-radius: 0 24px 24px 0;
+    background: var(--surface-eight);
+  }
+  .nav-drawer.open.x-site-nav { visibility: visible; }
+  /* during the width animation keep each label on one line, so the buttons
+     are pushed out by the drawer edge instead of re-wrapping */
+  .nav-drawer.freezing.x-site-nav .main-nav .nav-button.x-site-nav {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .overlay.x-site-nav {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+  }
+  .overlay.x-site-nav.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .overlay.x-site-nav { transition: none !important; }
 }

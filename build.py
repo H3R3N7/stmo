@@ -36,6 +36,7 @@ EXTERNAL_LINKS = {
     "https://weibo.com/u/7810333559",
     "https://hkems-stmo.top/",
     "https://github.com/HKEMS-STMO",
+    "https://qm.qq.com/q/dMBOmzmfGo&personal_qrcode_source=1001",
     "https://ti.qq.com/open_qq/index2.html?url=mqqapi%3a%2f%2fuserprofile%2ffriend_profile_card%3fsrc_type%3dweb%26version%3d1.0%26source%3d2%26uin%3d3478298786",
 }
 DEPLOY_LINKS = {

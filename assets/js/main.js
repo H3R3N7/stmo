@@ -19,31 +19,91 @@
   var logo = document.querySelector(".nav-logo");
   var previousOverflow = "";
   var isOpen = false;
+  var drawerTween = 0;
+
+  function drawerTarget() {
+    return Math.min(320, Math.round(window.innerWidth * 0.85));
+  }
+
+  // revanced.app grows the drawer out of the left edge (width 0 -> 20rem)
+  // instead of sliding it; the content is squeezed while it opens.
+  function animateDrawer(to, done) {
+    if (!drawer) return;
+    cancelAnimationFrame(drawerTween);
+    var from = parseFloat(drawer.style.width) || 0;
+    // the left inset grows with the panel: the buttons start flush with the
+    // page edge and are pushed inwards while the drawer slides out
+    var padMax = 16;
+    // keep the labels on one line while the panel width changes
+    drawer.classList.add("freezing");
+    var startPad = to === 0 ? padMax : 0;
+    drawer.style.paddingLeft = startPad + "px";
+    var startTime = 0;
+    drawer.style.visibility = "visible";
+    drawer.style.overflow = "hidden";
+    function step(now) {
+      if (!startTime) startTime = now;
+      var duration = to === 0 ? 240 : 360;
+      var p = Math.min(1, (now - startTime) / duration);
+      var eased = to === 0
+        ? 1 - Math.pow(1 - p, 3)
+        : 1 - Math.pow(1 - p, 6);
+      var width = from + (to - from) * eased;
+      drawer.style.width = width + "px";
+      var pad = startPad + ((to === 0 ? 0 : padMax) - startPad) * eased;
+      drawer.style.paddingLeft = pad.toFixed(2) + "px";
+      if (to === 0 && width < 44) drawer.style.visibility = "hidden";
+      if (p < 1) {
+        drawerTween = requestAnimationFrame(step);
+      } else {
+        drawer.style.width = to + "px";
+        drawer.style.overflow = to === 0 ? "hidden" : "hidden auto";
+        drawer.style.paddingLeft = "";
+        drawer.classList.remove("freezing");
+        if (to === 0) {
+          drawer.style.visibility = "hidden";
+          drawer.style.width = "0px";
+        }
+        if (done) done();
+      }
+    }
+    drawerTween = requestAnimationFrame(step);
+  }
+
 
   function openMenu() {
     if (!drawer || !menuBtn) return;
-    previousOverflow = document.body.style.overflow;
+    previousOverflow = root.style.overflow;
     drawer.classList.remove("desktop-only");
     drawer.classList.add("open");
     menuBtn.classList.add("open");
     menuBtn.setAttribute("aria-expanded", "true");
-    if (overlay) overlay.hidden = false;
+    if (overlay) {
+      overlay.hidden = false;
+      requestAnimationFrame(function () { overlay.classList.add("show"); });
+    }
     if (logo) logo.classList.add("hidden");
-    document.body.style.overflow = "hidden";
+    root.style.overflow = "hidden";
     isOpen = true;
+    animateDrawer(drawerTarget());
   }
 
   function closeMenu() {
     if (!drawer || !menuBtn) return;
     if (!isOpen) return;
+    isOpen = false;
     drawer.classList.remove("open");
-    drawer.classList.add("desktop-only");
     menuBtn.classList.remove("open");
     menuBtn.setAttribute("aria-expanded", "false");
-    if (overlay) overlay.hidden = true;
+    if (overlay) {
+      overlay.classList.remove("show");
+      window.setTimeout(function () {
+        if (!isOpen) overlay.hidden = true;
+      }, 300);
+    }
     if (logo) logo.classList.remove("hidden");
-    document.body.style.overflow = previousOverflow;
-    isOpen = false;
+    root.style.overflow = previousOverflow;
+    animateDrawer(0);
   }
 
   if (menuBtn) {
@@ -58,9 +118,27 @@
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") closeMenu();
   });
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) closeMenu();
-  });
+
+  // Crossing the breakpoint must not animate: at desktop widths the drawer is
+  // a normal flex container, at mobile it has to start collapsed at width 0.
+  function syncNavMode() {
+    if (!drawer) return;
+    if (window.innerWidth > 768) {
+      cancelAnimationFrame(drawerTween);
+      drawer.style.width = "";
+      drawer.style.visibility = "";
+      drawer.style.overflow = "";
+      if (isOpen) closeMenu();
+      return;
+    }
+    if (!isOpen) {
+      cancelAnimationFrame(drawerTween);
+      drawer.style.width = "0px";
+      drawer.style.visibility = "hidden";
+    }
+  }
+  window.addEventListener("resize", syncNavMode);
+  syncNavMode();
 
   function onScroll() {
     if (nav) nav.classList.toggle("scrolled", window.scrollY > 4);
